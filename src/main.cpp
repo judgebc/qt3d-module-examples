@@ -28,6 +28,8 @@
 #include <Qt3DExtras\Qt3DWindow>
 #include <Qt3DExtras\QFirstPersonCameraController>
 
+void addWidgets(QWidget *, QVBoxLayout *);
+
 int main(int argc, char ** argv)
 {
 	QApplication app(argc, argv);
@@ -49,8 +51,50 @@ int main(int argc, char ** argv)
 
 	widget->setWindowTitle(QStringLiteral("Basic Shapes"));
 
+	addWidgets(widget, vLayout);
+
 	widget->show();
 	widget->resize(1200, 1000);
 
 	return app.exec();
+}
+
+void addWidgets(QWidget * parent, QVBoxLayout * layout)
+{
+	auto info{ new QCommandLinkButton };
+	info->setText(QStringLiteral("Qt3D ready-made meshes"));
+	info->setDescription(QString::fromLatin1("Qt3D provides several ready-made meshes, like torus, cylinder, cone, cube, plane, and sphere."));
+	info->setIconSize(QSize(0, 0));
+
+	auto torus{ new QCheckBox(parent) };
+	torus->setChecked(true);
+	torus->setText(QStringLiteral("Torus"));
+
+	auto cone{ new QCheckBox(parent) };
+	cone->setChecked(true);
+	cone->setText(QStringLiteral("Cone"));
+
+	auto cylinder{ new QCheckBox(parent) };
+	cylinder->setChecked(true);
+	cylinder->setText(QStringLiteral("Cylinder"));
+
+	auto cuboid{ new QCheckBox(parent) };
+	cuboid->setChecked(true);
+	cuboid->setText(QStringLiteral("Cuboid"));
+
+	auto plane{ new QCheckBox(parent) };
+	plane->setChecked(true);
+	plane->setText(QStringLiteral("Plane"));
+
+	auto sphere{ new QCheckBox(parent) };
+	sphere->setChecked(true);
+	sphere->setText(QStringLiteral("Sphere"));
+
+	layout->addWidget(info);
+	layout->addWidget(torus);
+	layout->addWidget(cone);
+	layout->addWidget(cylinder);
+	layout->addWidget(cuboid);
+	layout->addWidget(plane);
+	layout->addWidget(sphere);
 }
