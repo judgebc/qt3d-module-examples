@@ -29,6 +29,8 @@
 #include <Qt3DExtras\Qt3DWindow>
 #include <Qt3DExtras\QFirstPersonCameraController>
 
+#include "scenemodifier.h"
+
 void addWidgets(QWidget *, QVBoxLayout *);
 void setupScene(Qt3DExtras::Qt3DWindow *);
 
