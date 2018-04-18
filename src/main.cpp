@@ -12,6 +12,7 @@
 #include <Qt3DCore\QAspectEngine>
 
 #include <Qt3DRender\QMesh>
+#include <Qt3DRender\QCamera>
 #include <Qt3DRender\QTechnique>
 #include <Qt3DRender\QMaterial>
 #include <Qt3DRender\QEffect>
@@ -29,6 +30,7 @@
 #include <Qt3DExtras\QFirstPersonCameraController>
 
 void addWidgets(QWidget *, QVBoxLayout *);
+void setupScene(Qt3DExtras::Qt3DWindow *);
 
 int main(int argc, char ** argv)
 {
@@ -36,6 +38,8 @@ int main(int argc, char ** argv)
 
 	auto view{ new Qt3DExtras::Qt3DWindow() };
 	view->defaultFrameGraph()->setClearColor(QColor(QRgb(0x4d4d4f)));
+
+	setupScene(view);
 
 	QWidget * container{ QWidget::createWindowContainer(view) };
 	container->setMinimumSize(QSize(200, 100));
@@ -57,6 +61,36 @@ int main(int argc, char ** argv)
 	widget->resize(1200, 1000);
 
 	return app.exec();
+}
+
+void setupScene(Qt3DExtras::Qt3DWindow * view)
+{
+	auto input{ new Qt3DInput::QInputAspect };
+	view->registerAspect(input);
+
+	auto cameraEntity = view->camera();
+
+	cameraEntity->lens()->setPerspectiveProjection(45.0f, 16.0f / 9.0f, 0.1f, 100.0f);
+	cameraEntity->setPosition(QVector3D(0, 0, 20.0f));
+	cameraEntity->setUpVector(QVector3D(0, 1, 0));
+	cameraEntity->setViewCenter(QVector3D(0, 0, 0));
+
+	auto rootEntity{ new Qt3DCore::QEntity };
+
+	auto lightEntity{ new Qt3DCore::QEntity(rootEntity) };
+	auto light{ new Qt3DRender::QPointLight(lightEntity) };
+	light->setColor("white");
+	light->setIntensity(1);
+	lightEntity->addComponent(light);
+
+	auto lightTransform{ new Qt3DCore::QTransform(lightEntity) };
+	lightTransform->setTranslation(cameraEntity->position());
+	lightEntity->addComponent(lightTransform);
+
+	auto camController{ new Qt3DExtras::QFirstPersonCameraController(rootEntity) };
+	camController->setCamera(cameraEntity);
+
+	view->setRootEntity(rootEntity);
 }
 
 void addWidgets(QWidget * parent, QVBoxLayout * layout)
