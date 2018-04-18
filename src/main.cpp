@@ -30,7 +30,17 @@
 
 int main(int argc, char ** argv)
 {
-	QApplication(argc, argv);
+	QApplication app(argc, argv);
 
+	auto * view = new Qt3DExtras::Qt3DWindow();
+	view->defaultFrameGraph()->setClearColor(QColor(QRgb(0x4d4d4f)));
 
+	QWidget * container = QWidget::createWindowContainer(view);
+	container->setMinimumSize(QSize(200, 100));
+	container->setMaximumSize(view->screen()->size());
+
+	container->show();
+	container->resize(1200, 1000);
+
+	return app.exec();
 }
