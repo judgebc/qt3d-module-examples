@@ -32,15 +32,25 @@ int main(int argc, char ** argv)
 {
 	QApplication app(argc, argv);
 
-	auto * view = new Qt3DExtras::Qt3DWindow();
+	auto view{ new Qt3DExtras::Qt3DWindow() };
 	view->defaultFrameGraph()->setClearColor(QColor(QRgb(0x4d4d4f)));
 
-	QWidget * container = QWidget::createWindowContainer(view);
+	QWidget * container{ QWidget::createWindowContainer(view) };
 	container->setMinimumSize(QSize(200, 100));
 	container->setMaximumSize(view->screen()->size());
 
-	container->show();
-	container->resize(1200, 1000);
+	auto widget{ new QWidget };
+	auto hLayout{ new QHBoxLayout(widget) };
+	auto vLayout{ new QVBoxLayout };
+
+	vLayout->setAlignment(Qt::AlignTop);
+	hLayout->addWidget(container, 1);
+	hLayout->addLayout(vLayout);
+
+	widget->setWindowTitle(QStringLiteral("Basic Shapes"));
+
+	widget->show();
+	widget->resize(1200, 1000);
 
 	return app.exec();
 }
