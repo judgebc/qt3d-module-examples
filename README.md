@@ -25,5 +25,5 @@ Currently there's no support for batch files, but it should be fairly straight f
 
 ## Available Examples
 
-[Basic Shapes](./basic_shapes)
-[Materials](./materials)
+* [Basic Shapes](./basic_shapes)
+* [Materials](./materials)
