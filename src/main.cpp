@@ -15,6 +15,7 @@
 #include <Qt3DExtras\qt3dwindow.h>
 #include <Qt3DExtras\qfirstpersoncameracontroller.h>
 #include <Qt3DExtras\qplanemesh.h>
+#include <Qt3DExtras\qnormaldiffusespecularmapmaterial.h>
 
 #include "planeentity.h"
 
@@ -55,6 +56,24 @@ Qt3DCore::QEntity * createSceneRoot(const Qt3DExtras::Qt3DWindow& view)
     planeEntity->mesh()->setWidth(100.0f);
     planeEntity->mesh()->setMeshResolution(QSize(20, 20));
 
+    auto normalDSM{ new Qt3DExtras::QNormalDiffuseSpecularMapMaterial };
+    normalDSM->setTextureScale(10.0f);
+    normalDSM->setShininess(80.0f);
+    normalDSM->setAmbient(QColor::fromRgbF(0.2f, 0.2f, 0.2f, 1.0f));
+
+    auto diffuseImage{ new Qt3DRender::QTextureImage };
+    diffuseImage->setSource(QUrl(QStringLiteral("qrc:/textures/diffuse")));
+    normalDSM->diffuse()->addTextureImage(diffuseImage);
+
+    auto specularImage{ new Qt3DRender::QTextureImage };
+    specularImage->setSource(QUrl(QStringLiteral("qrc:/textures/specular")));
+    normalDSM->specular()->addTextureImage(specularImage);
+
+    auto normalImage{ new Qt3DRender::QTextureImage };
+    normalImage->setSource(QUrl(QStringLiteral("qrc:/textures/normal")));
+    normalDSM->normal()->addTextureImage(normalImage);
+
+    planeEntity->addComponent(normalDSM);
   }
 
   return sceneRoot;
