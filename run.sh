@@ -51,5 +51,3 @@ cmake --build $folder/build --config $config
 ./$folder/build/$config/render.exe
 
 exit 0
-
-
