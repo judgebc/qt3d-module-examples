@@ -1,0 +1,10 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+	<file alias="textures/diffuse">textures/pattern_09/diffuse.webp</file>
+	<file alias="textures/normal">textures/pattern_09/normal.webp</file>
+	<file alias="textures/specular">textures/pattern_09/specular.webp</file>
+	<file alias="textures/chest">textures/chest/diffuse.webp</file>
+	<file alias="mesh/chest">meshes/Chest.obj</file>
+	<file alias="mesh/trefoil">meshes/trefoil.obj</file>
+</qresource>
+</RCC>
