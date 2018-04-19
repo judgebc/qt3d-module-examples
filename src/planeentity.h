@@ -15,8 +15,9 @@ namespace Qt3DCore
 class PlaneEntity : public Qt3DCore::QEntity
 {
 public:
-  PlaneEntity(Qt3DCore::QNode * parent = Q_NULLPTR);
-  ~PlaneEntity();
+  explicit PlaneEntity(Qt3DCore::QNode * parent = Q_NULLPTR);
+
+  Qt3DExtras::QPlaneMesh * mesh() const;
 
 private:
   Qt3DExtras::QPlaneMesh * m_mesh;
