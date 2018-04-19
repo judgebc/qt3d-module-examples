@@ -1,4 +1,5 @@
 #include "scenemodifier.h"
+#include <iostream>
 
 #include <Qt3DCore\qentity.h>
 #include <Qt3DCore/qtransform.h>
@@ -78,6 +79,57 @@ SceneModifier::SceneModifier(Qt3DCore::QEntity * rootEntity) :
 		m_cylinderEntity->addComponent(cylinderMesh);
 		m_cylinderEntity->addComponent(cylinderTransform);
 		m_cylinderEntity->addComponent(cylinderMaterial);
+	}
+
+	{
+		auto cuboid{ new Qt3DExtras::QCuboidMesh };
+
+		auto cuboidTransform{ new Qt3DCore::QTransform };
+		cuboidTransform->setScale(4.0f);
+		cuboidTransform->setTranslation(QVector3D(5.0f, -4.0f, 0.0f));
+
+		auto cuboidMaterial{ new Qt3DExtras::QPhongMaterial };
+		cuboidMaterial->setDiffuse(QColor(QRgb(0x928327)));
+
+		m_cuboidEntity->addComponent(cuboid);
+		m_cuboidEntity->addComponent(cuboidTransform);
+		m_cuboidEntity->addComponent(cuboidMaterial);
+	}
+
+	{
+		auto plane{ new Qt3DExtras::QPlaneMesh };
+		plane->setWidth(2);
+		plane->setHeight(2);
+
+		auto planeTransform{ new Qt3DCore::QTransform };
+		planeTransform->setScale(1.3f);
+		planeTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(1.0f, 0.0f, 0.0f), 90.0f));
+		planeTransform->setTranslation(QVector3D(0.0f, -4.0f, 0.0f));
+
+		auto planeMaterial{ new Qt3DExtras::QPhongMaterial };
+		planeMaterial->setDiffuse(QColor(QRgb(0xa69929)));
+
+		m_planeEntity->addComponent(plane);
+		m_planeEntity->addComponent(planeTransform);
+		m_planeEntity->addComponent(planeMaterial);
+	}
+
+	{
+		auto sphere{ new Qt3DExtras::QSphereMesh };
+		sphere->setRings(20);
+		sphere->setSlices(20);
+		sphere->setRadius(2);
+
+		auto sphereTransform{ new Qt3DCore::QTransform };
+		sphereTransform->setScale(1.3f);
+		sphereTransform->setTranslation(QVector3D(-5.0f, -4.0f, 0.0f));
+
+		auto sphereMaterial{ new Qt3DExtras::QPhongMaterial };
+		sphereMaterial->setDiffuse(QColor(QRgb(0xa69929)));
+
+		m_sphereEntity->addComponent(sphere);
+		m_sphereEntity->addComponent(sphereTransform);
+		m_sphereEntity->addComponent(sphereMaterial);
 	}
 }
 
