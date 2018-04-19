@@ -3,8 +3,8 @@
 #include <Qt3DExtras\qplanemesh.h>
 #include <Qt3DCore/qtransform.h>
 
-PlaneEntity::PlaneEntity(Qt3DCore::QNode * parent) :
-  Qt3DCore::QEntity(new Qt3DCore::QEntity(parent)),
+PlaneEntity::PlaneEntity(Qt3DCore::QEntity * parent) :
+  Qt3DCore::QEntity(parent),
   m_mesh(new Qt3DExtras::QPlaneMesh),
   m_transform(new Qt3DCore::QTransform)
 {

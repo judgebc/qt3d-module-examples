@@ -6,6 +6,7 @@
 #include <Qt3DRender\qcamera.h>
 #include <Qt3DRender\qrenderaspect.h>
 #include <Qt3DRender\qtextureimage.h>
+#include <Qt3DRender\qmesh.h>
 
 #include <Qt3DInput\qinputaspect.h>
 
@@ -17,6 +18,7 @@
 #include <Qt3DExtras\qplanemesh.h>
 #include <Qt3DExtras\qnormaldiffusespecularmapmaterial.h>
 
+#include "renderableentity.h"
 #include "planeentity.h"
 
 Qt3DCore::QEntity * createSceneRoot(const Qt3DExtras::Qt3DWindow&);
@@ -74,6 +76,10 @@ Qt3DCore::QEntity * createSceneRoot(const Qt3DExtras::Qt3DWindow& view)
     normalDSM->normal()->addTextureImage(normalImage);
 
     planeEntity->addComponent(normalDSM);
+  }
+
+  {
+
   }
 
   return sceneRoot;
