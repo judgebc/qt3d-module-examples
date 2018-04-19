@@ -15,24 +15,36 @@
 #include <Qt3DExtras\qt3dwindow.h>
 #include <Qt3DExtras\qfirstpersoncameracontroller.h>
 
-Qt3DCore::QEntity * createSceneRoot();
+Qt3DCore::QEntity * createSceneRoot(const Qt3DExtras::Qt3DWindow&);
 
 int main(int argc, char * argv[])
 {
   QGuiApplication app(argc, argv);
 
-  Qt3DCore::QEntity * sceneRoot{ createSceneRoot() };
-
   Qt3DExtras::Qt3DWindow view;
+
+  Qt3DCore::QEntity * sceneRoot{ createSceneRoot(view) };
+
   view.setRootEntity(sceneRoot);
   view.show();
 
   return app.exec();
 }
 
-Qt3DCore::QEntity * createSceneRoot()
+Qt3DCore::QEntity * createSceneRoot(const Qt3DExtras::Qt3DWindow& view)
 {
   Qt3DCore::QEntity * sceneRoot{ new Qt3DCore::QEntity };
+
+  {
+    Qt3DRender::QCamera * camera = view.camera();
+    camera->setProjectionType(Qt3DRender::QCameraLens::PerspectiveProjection);
+    camera->setUpVector(QVector3D(0.0, 1.0f, 0.0f));
+    camera->setViewCenter(QVector3D(0.0f, 3.5f, 0.0f));
+    camera->setPosition(QVector3D(0.0f, 3.5f, 25.0f));
+
+    auto camController{ new Qt3DExtras::QFirstPersonCameraController(sceneRoot) };
+    camController->setCamera(camera);
+  }
 
   return sceneRoot;
 }
