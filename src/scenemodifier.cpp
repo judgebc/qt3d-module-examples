@@ -41,7 +41,7 @@ SceneModifier::SceneModifier(Qt3DCore::QEntity * rootEntity) :
 
 	{
 		auto coneMesh{ new Qt3DExtras::QConeMesh };
-		coneMesh->setTopRadius(0.5);
+		coneMesh->setTopRadius(0);
 		coneMesh->setBottomRadius(1);
 		coneMesh->setLength(3);
 		coneMesh->setRings(50);
@@ -58,6 +58,26 @@ SceneModifier::SceneModifier(Qt3DCore::QEntity * rootEntity) :
 		m_coneEntity->addComponent(coneMesh);
 		m_coneEntity->addComponent(coneTransform);
 		m_coneEntity->addComponent(coneMaterial);
+	}
+
+	{
+		auto cylinderMesh{ new Qt3DExtras::QCylinderMesh };
+		cylinderMesh->setRadius(1);
+		cylinderMesh->setLength(3);
+		cylinderMesh->setRings(100);
+		cylinderMesh->setSlices(20);
+
+		auto cylinderTransform{ new Qt3DCore::QTransform };
+		cylinderTransform->setScale(1.5);
+		cylinderTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(1.0f, 0.0f, 0.0f), 45.0f));
+		cylinderTransform->setTranslation(QVector3D(-5.0f, 4.0f, -1.5f));
+
+		auto cylinderMaterial{ new Qt3DExtras::QPhongMaterial };
+		cylinderMaterial->setDiffuse(QColor(QRgb(0x928327)));
+
+		m_cylinderEntity->addComponent(cylinderMesh);
+		m_cylinderEntity->addComponent(cylinderTransform);
+		m_cylinderEntity->addComponent(cylinderMaterial);
 	}
 }
 
