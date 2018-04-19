@@ -132,6 +132,7 @@ void addWidgets(QWidget * parent, QVBoxLayout * layout, SceneModifier * sceneMod
 	layout->addWidget(sphere);
 
 	QObject::connect(torus, &QCheckBox::stateChanged, sceneModifier, &SceneModifier::enableTorus);
+	QObject::connect(cone, &QCheckBox::stateChanged, sceneModifier, &SceneModifier::enableCone);
 
 	torus->setChecked(true);
 	cone->setChecked(true);

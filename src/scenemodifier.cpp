@@ -38,6 +38,27 @@ SceneModifier::SceneModifier(Qt3DCore::QEntity * rootEntity) :
 		m_torusEntity->addComponent(torusMaterial);
 		m_torusEntity->addComponent(torusTransform);
 	}
+
+	{
+		auto coneMesh{ new Qt3DExtras::QConeMesh };
+		coneMesh->setTopRadius(0.5);
+		coneMesh->setBottomRadius(1);
+		coneMesh->setLength(3);
+		coneMesh->setRings(50);
+		coneMesh->setSlices(20);
+
+		auto coneTransform{ new Qt3DCore::QTransform };
+		coneTransform->setScale(1.5f);
+		coneTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(1.0f, 0.0f, 0.0f), 45.0f));
+		coneTransform->setTranslation(QVector3D(0.0f, 4.0f, -1.5f));
+
+		auto coneMaterial{ new Qt3DExtras::QPhongMaterial };
+		coneMaterial->setDiffuse(QColor(QRgb(0x928327)));
+
+		m_coneEntity->addComponent(coneMesh);
+		m_coneEntity->addComponent(coneTransform);
+		m_coneEntity->addComponent(coneMaterial);
+	}
 }
 
 void SceneModifier::enableTorus(bool enabled)
