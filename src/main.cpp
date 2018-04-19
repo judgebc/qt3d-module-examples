@@ -21,5 +21,18 @@ int main(int argc, char * argv[])
 {
   QGuiApplication app(argc, argv);
 
+  Qt3DCore::QEntity * sceneRoot{ createSceneRoot() };
+
+  Qt3DExtras::Qt3DWindow view;
+  view.setRootEntity(sceneRoot);
+  view.show();
+
   return app.exec();
+}
+
+Qt3DCore::QEntity * createSceneRoot()
+{
+  Qt3DCore::QEntity * sceneRoot{ new Qt3DCore::QEntity };
+
+  return sceneRoot;
 }
