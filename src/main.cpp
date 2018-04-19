@@ -31,8 +31,8 @@
 
 #include "scenemodifier.h"
 
-void addWidgets(QWidget *, QVBoxLayout *);
-void setupScene(Qt3DExtras::Qt3DWindow *);
+void addWidgets(QWidget *, QVBoxLayout *, SceneModifier *);
+Qt3DCore::QEntity * setupScene(Qt3DExtras::Qt3DWindow *);
 
 int main(int argc, char ** argv)
 {
@@ -41,7 +41,8 @@ int main(int argc, char ** argv)
 	auto view{ new Qt3DExtras::Qt3DWindow() };
 	view->defaultFrameGraph()->setClearColor(QColor(QRgb(0x4d4d4f)));
 
-	setupScene(view);
+	auto root = setupScene(view);
+	auto sceneModifier{ new SceneModifier(root) };
 
 	QWidget * container{ QWidget::createWindowContainer(view) };
 	container->setMinimumSize(QSize(200, 100));
@@ -57,7 +58,7 @@ int main(int argc, char ** argv)
 
 	widget->setWindowTitle(QStringLiteral("Basic Shapes"));
 
-	addWidgets(widget, vLayout);
+	addWidgets(widget, vLayout, sceneModifier);
 
 	widget->show();
 	widget->resize(1200, 1000);
@@ -65,7 +66,7 @@ int main(int argc, char ** argv)
 	return app.exec();
 }
 
-void setupScene(Qt3DExtras::Qt3DWindow * view)
+Qt3DCore::QEntity * setupScene(Qt3DExtras::Qt3DWindow * view)
 {
 	auto input{ new Qt3DInput::QInputAspect };
 	view->registerAspect(input);
@@ -93,9 +94,11 @@ void setupScene(Qt3DExtras::Qt3DWindow * view)
 	camController->setCamera(cameraEntity);
 
 	view->setRootEntity(rootEntity);
+
+	return rootEntity;
 }
 
-void addWidgets(QWidget * parent, QVBoxLayout * layout)
+void addWidgets(QWidget * parent, QVBoxLayout * layout, SceneModifier * sceneModifier)
 {
 	auto info{ new QCommandLinkButton };
 	info->setText(QStringLiteral("Qt3D ready-made meshes"));
@@ -103,27 +106,21 @@ void addWidgets(QWidget * parent, QVBoxLayout * layout)
 	info->setIconSize(QSize(0, 0));
 
 	auto torus{ new QCheckBox(parent) };
-	torus->setChecked(true);
 	torus->setText(QStringLiteral("Torus"));
 
 	auto cone{ new QCheckBox(parent) };
-	cone->setChecked(true);
 	cone->setText(QStringLiteral("Cone"));
 
 	auto cylinder{ new QCheckBox(parent) };
-	cylinder->setChecked(true);
 	cylinder->setText(QStringLiteral("Cylinder"));
 
 	auto cuboid{ new QCheckBox(parent) };
-	cuboid->setChecked(true);
 	cuboid->setText(QStringLiteral("Cuboid"));
 
 	auto plane{ new QCheckBox(parent) };
-	plane->setChecked(true);
 	plane->setText(QStringLiteral("Plane"));
 
 	auto sphere{ new QCheckBox(parent) };
-	sphere->setChecked(true);
 	sphere->setText(QStringLiteral("Sphere"));
 
 	layout->addWidget(info);
@@ -133,4 +130,13 @@ void addWidgets(QWidget * parent, QVBoxLayout * layout)
 	layout->addWidget(cuboid);
 	layout->addWidget(plane);
 	layout->addWidget(sphere);
+
+	QObject::connect(torus, &QCheckBox::stateChanged, sceneModifier, &SceneModifier::enableTorus);
+
+	torus->setChecked(true);
+	cone->setChecked(true);
+	cylinder->setChecked(true);
+	cuboid->setChecked(true);
+	plane->setChecked(true);
+	sphere->setChecked(true);
 }

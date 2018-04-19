@@ -12,7 +12,6 @@ namespace Qt3DCore
 class SceneModifier : public QObject
 {
 	Q_OBJECT
-
 public:
 	explicit SceneModifier(Qt3DCore::QEntity * rootEntity);
 
