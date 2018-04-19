@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 project(render)
@@ -9,7 +10,7 @@ find_package(Qt5 COMPONENTS gui 3dcore 3drender 3dinput 3dlogic 3dextras 3danima
 
 file(GLOB src src/*.cpp src/*.h)
 
-add_executable(${PROJECT_NAME} ${src})
+add_executable(${PROJECT_NAME} ${src} src/resources/resources.qrc)
 target_link_libraries(${PROJECT_NAME}
 	Qt5::Gui
 	Qt5::3DCore

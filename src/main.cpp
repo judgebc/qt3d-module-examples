@@ -14,6 +14,9 @@
 #include <Qt3DExtras\qforwardrenderer.h>
 #include <Qt3DExtras\qt3dwindow.h>
 #include <Qt3DExtras\qfirstpersoncameracontroller.h>
+#include <Qt3DExtras\qplanemesh.h>
+
+#include "planeentity.h"
 
 Qt3DCore::QEntity * createSceneRoot(const Qt3DExtras::Qt3DWindow&);
 
@@ -44,6 +47,14 @@ Qt3DCore::QEntity * createSceneRoot(const Qt3DExtras::Qt3DWindow& view)
 
     auto camController{ new Qt3DExtras::QFirstPersonCameraController(sceneRoot) };
     camController->setCamera(camera);
+  }
+
+  {
+    auto planeEntity{ new PlaneEntity(sceneRoot) };
+    planeEntity->mesh()->setHeight(100.0f);
+    planeEntity->mesh()->setWidth(100.0f);
+    planeEntity->mesh()->setMeshResolution(QSize(20, 20));
+
   }
 
   return sceneRoot;
