@@ -5,7 +5,21 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 project(render)
 
-find_package(Qt5 COMPONENTS gui 3dcore 3drender 3dinput 3dlogic 3dextras 3danimation widgets REQUIRED)
+find_package(Qt5 COMPONENTS
+	gui
+	3dcore
+	3drender
+	3dinput
+	3dlogic
+	3dextras
+	3danimation
+	widgets
+	concurrent
+	gamepad
+	network
+	core
+REQUIRED)
+
 
 file(GLOB src src/*.cpp src/*.h)
 
@@ -24,17 +38,18 @@ target_link_libraries(${PROJECT_NAME}
 set(QT_DLL_BIN ${Qt5Core_DIR}/../../../bin)
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${QT_DLL_BIN}/Qt5Cored.dll ${CMAKE_BINARY_DIR}/Debug
-	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${QT_DLL_BIN}/Qt5Guid.dll ${CMAKE_BINARY_DIR}/Debug
-	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${QT_DLL_BIN}/Qt5Widgetsd.dll ${CMAKE_BINARY_DIR}/Debug
-	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${QT_DLL_BIN}/Qt53DInputd.dll ${CMAKE_BINARY_DIR}/Debug
-	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${QT_DLL_BIN}/Qt53DRenderd.dll ${CMAKE_BINARY_DIR}/Debug
-	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${QT_DLL_BIN}/Qt53DExtrasd.dll ${CMAKE_BINARY_DIR}/Debug
-	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${QT_DLL_BIN}/Qt53DCored.dll ${CMAKE_BINARY_DIR}/Debug
-	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${QT_DLL_BIN}/Qt53DLogicd.dll ${CMAKE_BINARY_DIR}/Debug
-	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${QT_DLL_BIN}/Qt5Gamepadd.dll ${CMAKE_BINARY_DIR}/Debug
-	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${QT_DLL_BIN}/Qt5Networkd.dll ${CMAKE_BINARY_DIR}/Debug
-	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${QT_DLL_BIN}/Qt5Concurrentd.dll ${CMAKE_BINARY_DIR}/Debug
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:Qt5::Core> ${CMAKE_BINARY_DIR}/$<CONFIGURATION>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:Qt5::Gui> ${CMAKE_BINARY_DIR}/$<CONFIGURATION>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:Qt5::Widgets> ${CMAKE_BINARY_DIR}/$<CONFIGURATION>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:Qt5::3DCore> ${CMAKE_BINARY_DIR}/$<CONFIGURATION>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:Qt5::3DRender> ${CMAKE_BINARY_DIR}/$<CONFIGURATION>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:Qt5::3DInput> ${CMAKE_BINARY_DIR}/$<CONFIGURATION>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:Qt5::3DLogic> ${CMAKE_BINARY_DIR}/$<CONFIGURATION>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:Qt5::3DExtras> ${CMAKE_BINARY_DIR}/$<CONFIGURATION>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:Qt5::3DAnimation> ${CMAKE_BINARY_DIR}/$<CONFIGURATION>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:Qt5::Concurrent> ${CMAKE_BINARY_DIR}/$<CONFIGURATION>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:Qt5::Network> ${CMAKE_BINARY_DIR}/$<CONFIGURATION>
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:Qt5::Gamepad> ${CMAKE_BINARY_DIR}/$<CONFIGURATION>
 
 	COMMENT "Copying Qt Binaries" VERBATIM
 )
