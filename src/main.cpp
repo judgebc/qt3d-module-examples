@@ -11,7 +11,7 @@
 
 #include <Qt3DInput\qinputaspect.h>
 
-#include <Qt3DExtras\qphongalphamaterial.h>
+#include <Qt3DExtras\qphongmaterial.h>
 #include <Qt3DExtras\qdiffusemapmaterial.h>
 #include <Qt3DExtras\qforwardrenderer.h>
 #include <Qt3DExtras\qt3dwindow.h>
@@ -21,6 +21,7 @@
 
 #include "renderableentity.h"
 #include "planeentity.h"
+#include "rotatingtrefoilknot.h"
 
 Qt3DCore::QEntity * createSceneRoot(const Qt3DExtras::Qt3DWindow&);
 
@@ -93,6 +94,18 @@ Qt3DCore::QEntity * createSceneRoot(const Qt3DExtras::Qt3DWindow& view)
     diffuseMap->diffuse()->addTextureImage(diffuseImage);
 
     chest->addComponent(diffuseMap);
+  }
+
+  {
+    auto trefoil{ new RotatingTrefoilKnot(sceneRoot) };
+    trefoil->setPosition(QVector3D(0.0f, 3.5f, 0.0f));
+    trefoil->setScale(0.5f);
+
+    auto phongMat{ new Qt3DExtras::QPhongMaterial };
+    phongMat->setDiffuse(QColor(204, 205, 75));
+    phongMat->setSpecular(Qt::white);
+
+    trefoil->addComponent(phongMat);
   }
 
   return sceneRoot;
