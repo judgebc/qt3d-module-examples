@@ -2,6 +2,7 @@
 
 #include <Qt3DCore\qentity.h>
 #include <Qt3DCore\qaspectengine.h>
+#include <Qt3DCore\qtransform.h>
 
 #include <Qt3DRender\qcamera.h>
 #include <Qt3DRender\qrenderaspect.h>
@@ -79,7 +80,19 @@ Qt3DCore::QEntity * createSceneRoot(const Qt3DExtras::Qt3DWindow& view)
   }
 
   {
+    auto chest{ new RenderableEntity(sceneRoot) };
+    chest->transform()->setScale(0.03f);
+    chest->mesh()->setSource(QUrl(QStringLiteral("qrc:/mesh/chest")));
 
+    auto diffuseMap{ new Qt3DExtras::QDiffuseMapMaterial };
+    diffuseMap->setSpecular(QColor::fromRgbF(0.2f, 0.2f, 0.2f, 1.0f));
+    diffuseMap->setShininess(2.0f);
+
+    auto diffuseImage{ new Qt3DRender::QTextureImage };
+    diffuseImage->setSource(QUrl(QStringLiteral("qrc:/textures/chest")));
+    diffuseMap->diffuse()->addTextureImage(diffuseImage);
+
+    chest->addComponent(diffuseMap);
   }
 
   return sceneRoot;
