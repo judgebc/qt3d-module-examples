@@ -38,9 +38,6 @@ Barrel::Barrel(Qt3DCore::QNode * parent) :
 	m_diffuse(DiffuseColor::Red),
 	m_specular(SpecularColor::None),
 	m_material(new Qt3DExtras::QNormalDiffuseSpecularMapMaterial),
-	m_diffuseTexture(nullptr),
-	m_normalTexture(nullptr),
-	m_specularTexture(nullptr),
 	m_diffuseTextureImage(new Qt3DRender::QTextureImage),
 	m_normalTextureImage(new Qt3DRender::QTextureImage),
 	m_specularTextureImage(new Qt3DRender::QTextureImage)
@@ -48,13 +45,9 @@ Barrel::Barrel(Qt3DCore::QNode * parent) :
 	mesh()->setSource(QUrl(QStringLiteral("qrc:/mesh/barrel")));
 	transform()->setScale(0.03f);
 
-	m_diffuseTexture = m_material->diffuse();
-	m_normalTexture = m_material->normal();
-	m_specularTexture = m_material->specular();
-
-	m_diffuseTexture->addTextureImage(m_diffuseTextureImage);
-	m_normalTexture->addTextureImage(m_normalTextureImage);
-	m_specularTexture->addTextureImage(m_specularTextureImage);
+	m_material->diffuse()->addTextureImage(m_diffuseTextureImage);
+	m_material->normal()->addTextureImage(m_normalTextureImage);
+	m_material->specular()->addTextureImage(m_specularTextureImage);
 
 	setNormalTextureSource();
 	setDiffuseTextureSource();

@@ -9,7 +9,6 @@ namespace Qt3DExtras
 
 namespace Qt3DRender
 {
-	class QAbstractTexture;
 	class QTextureImage;
 }
 
@@ -58,10 +57,6 @@ private:
 	SpecularColor m_specular;
 
 	Qt3DExtras::QNormalDiffuseSpecularMapMaterial * m_material;
-
-	Qt3DRender::QAbstractTexture * m_diffuseTexture;
-	Qt3DRender::QAbstractTexture * m_normalTexture;
-	Qt3DRender::QAbstractTexture * m_specularTexture;
 
 	Qt3DRender::QTextureImage * m_diffuseTextureImage;
 	Qt3DRender::QTextureImage * m_normalTextureImage;

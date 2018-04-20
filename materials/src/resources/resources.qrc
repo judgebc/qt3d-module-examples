@@ -1,8 +1,8 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
-	<file alias="textures/diffuse">textures/pattern_09/diffuse.webp</file>
-	<file alias="textures/normal">textures/pattern_09/normal.webp</file>
-	<file alias="textures/specular">textures/pattern_09/specular.webp</file>
+	<file alias="textures/floor/diffuse">textures/pattern_09/diffuse.webp</file>
+	<file alias="textures/floor/normal">textures/pattern_09/normal.webp</file>
+	<file alias="textures/floor/specular">textures/pattern_09/specular.webp</file>
 	<file alias="textures/chest">textures/chest/diffuse.webp</file>
 	<file alias="textures/barrel/diffuse_black">textures/barrel/diffus_black.webp</file>
 	<file alias="textures/barrel/diffuse_blue">textures/barrel/diffus_blue.webp</file>
