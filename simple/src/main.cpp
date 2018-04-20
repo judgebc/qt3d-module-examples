@@ -50,5 +50,44 @@ Qt3DCore::QEntity * createScene()
 {
 	auto root{ new Qt3DCore::QEntity };
 
+	auto material{ new Qt3DExtras::QPhongMaterial(root) };
+
+	{
+		auto torusEntity{ new Qt3DCore::QEntity(root) };
+		auto torusMesh{ new Qt3DExtras::QTorusMesh };
+		torusMesh->setRadius(5);
+		torusMesh->setMinorRadius(1);
+		torusMesh->setRings(100);
+		torusMesh->setSlices(20);
+
+		auto torusTransform{ new Qt3DCore::QTransform };
+		torusTransform->setScale3D(QVector3D(1.5, 1, 0.5));
+		torusTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(1, 0, 0), 45.0f));
+
+		torusEntity->addComponent(material);
+		torusEntity->addComponent(torusMesh);
+		torusEntity->addComponent(torusTransform);
+	}
+
+	{
+		auto sphereEntity{ new Qt3DCore::QEntity(root) };
+		auto sphereMesh{ new Qt3DExtras::QSphereMesh };
+		sphereMesh->setRadius(3);
+
+		auto sphereTransform{ new Qt3DCore::QTransform };
+
+		auto sphereRotateAnimation{ new QPropertyAnimation(sphereTransform) };
+		sphereRotateAnimation->setPropertyName("angle");
+		sphereRotateAnimation->setStartValue(QVariant::fromValue(0));
+		sphereRotateAnimation->setStartValue(QVariant::fromValue(360));
+		sphereRotateAnimation->setDuration(10000);
+		sphereRotateAnimation->setLoopCount(-1);
+		sphereRotateAnimation->start();
+
+		sphereEntity->addComponent(sphereMesh);
+		sphereEntity->addComponent(sphereTransform);
+		sphereEntity->addComponent(material);
+	}
+
 	return root;
 }
