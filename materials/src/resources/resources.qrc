@@ -4,7 +4,22 @@
 	<file alias="textures/normal">textures/pattern_09/normal.webp</file>
 	<file alias="textures/specular">textures/pattern_09/specular.webp</file>
 	<file alias="textures/chest">textures/chest/diffuse.webp</file>
+	<file alias="textures/barrel/diffuse_black">textures/barrel/diffus_black.webp</file>
+	<file alias="textures/barrel/diffuse_blue">textures/barrel/diffus_blue.webp</file>
+	<file alias="textures/barrel/diffuse_green">textures/barrel/diffus_green.webp</file>
+	<file alias="textures/barrel/diffuse_red">textures/barrel/diffus_red.webp</file>
+	<file alias="textures/barrel/diffuse_rust">textures/barrel/diffus_rust.webp</file>
+	<file alias="textures/barrel/diffuse_stainless_steel">textures/barrel/diffus_stainless_steel.webp</file>
+	<file alias="textures/barrel/diffuse_yellow">textures/barrel/diffus_yellow.webp</file>
+	<file alias="textures/barrel/normal_hard_bumps">textures/barrel/normal_hard_bumps.webp</file>
+	<file alias="textures/barrel/normal_middle_bumps">textures/barrel/normal_middle_bumps.webp</file>
+	<file alias="textures/barrel/normal_no_bumps">textures/barrel/normal_no_bumps.webp</file>
+	<file alias="textures/barrel/normal_soft_bumps">textures/barrel/normal_soft_bumps.webp</file>
+	<file alias="textures/barrel/specular">textures/barrel/specular.webp</file>
+	<file alias="textures/barrel/specular_rust">textures/barrel/specular_rust.webp</file>
+	<file alias="textures/barrel/specular_stainless_steel">textures/barrel/specular_stainless_steel.webp</file>
 	<file alias="mesh/chest">meshes/Chest.obj</file>
 	<file alias="mesh/trefoil">meshes/trefoil.obj</file>
+	<file alias="mesh/barrel">meshes/metal_barrel.obj</file>
 </qresource>
 </RCC>
