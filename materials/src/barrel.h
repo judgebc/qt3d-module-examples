@@ -17,9 +17,8 @@ class Barrel : public RenderableEntity
 {
 public:
 	explicit Barrel(Qt3DCore::QNode * parent = Q_NULLPTR);
-	~Barrel();
 
-	enum DiffuseColor
+	enum class DiffuseColor
 	{
 		Red = 0,
 		Blue,
@@ -28,14 +27,14 @@ public:
 		StainlessSteelDiffuse
 	};
 
-	enum SpecularColor
+	enum class SpecularColor
 	{
 		RustSpecular = 0,
 		StainlessSteelSpecular,
 		None
 	};
 
-	enum Bumps
+	enum class Bumps
 	{
 		NoBumps = 0,
 		SoftBumps,
