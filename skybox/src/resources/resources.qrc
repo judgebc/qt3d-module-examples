@@ -1,10 +1,10 @@
 <!DOCTYPE RCC><RCC version="1.0">
-<qresource prefix="/skybox">
-    <file>skybox/cubemap_negx.jpg</file>
-    <file>skybox/cubemap_negy.jpg</file>
-    <file>skybox/cubemap_negz.jpg</file>
-    <file>skybox/cubemap_posx.jpg</file>
-    <file>skybox/cubemap_posy.jpg</file>
-    <file>skybox/cubemap_posz.jpg</file>
+<qresource>
+    <file alias="box_negx">skybox/cubemap_negx.jpg</file>
+    <file alias="box_negy">skybox/cubemap_negy.jpg</file>
+    <file alias="box_negz">skybox/cubemap_negz.jpg</file>
+    <file alias="box_posx">skybox/cubemap_posx.jpg</file>
+    <file alias="box_posy">skybox/cubemap_posy.jpg</file>
+    <file alias="box_posz">skybox/cubemap_posz.jpg</file>
 </qresource>
 </RCC>
