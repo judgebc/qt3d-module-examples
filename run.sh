@@ -3,7 +3,9 @@
 print_folder_list ()
 {
 	echo
-	echo " Materials"
+	echo "	Basic_Shapes"
+	echo "	Materials"
+	echo "	Simple"
 }
 
 config=""
