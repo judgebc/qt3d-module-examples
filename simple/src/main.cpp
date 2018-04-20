@@ -20,6 +20,8 @@
 
 #include <qpropertyanimation.h>
 
+#include "orbittransformcontroller.h"
+
 Qt3DCore::QEntity * createScene();
 
 int main(int argc, char * argv[])
@@ -75,11 +77,15 @@ Qt3DCore::QEntity * createScene()
 		sphereMesh->setRadius(3);
 
 		auto sphereTransform{ new Qt3DCore::QTransform };
+		auto controller{ new OrbitTransformController(sphereTransform) };
+		controller->setTarget(sphereTransform);
+		controller->setRadius(20.0f);
 
 		auto sphereRotateAnimation{ new QPropertyAnimation(sphereTransform) };
+		sphereRotateAnimation->setTargetObject(controller);
 		sphereRotateAnimation->setPropertyName("angle");
 		sphereRotateAnimation->setStartValue(QVariant::fromValue(0));
-		sphereRotateAnimation->setStartValue(QVariant::fromValue(360));
+		sphereRotateAnimation->setEndValue(QVariant::fromValue(360));
 		sphereRotateAnimation->setDuration(10000);
 		sphereRotateAnimation->setLoopCount(-1);
 		sphereRotateAnimation->start();
