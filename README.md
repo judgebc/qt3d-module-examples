@@ -28,3 +28,4 @@ Currently there's no support for batch files, but it should be fairly straight f
 * [Basic Shapes](./basic_shapes)
 * [Materials](./materials)
 * [Simple](./simple)
+* [Skybox](./skybox)
