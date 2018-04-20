@@ -1,23 +1,12 @@
 #include <QGuiApplication>
 
 #include <Qt3DCore\QEntity>
-#include <Qt3DCore\qtransform.h>
-#include <Qt3DCore\qaspectengine.h>
 
 #include <Qt3DRender\qcamera.h>
 #include <Qt3DRender\qcameralens.h>
-#include <Qt3DRender\qrenderaspect.h>
 
-#include <Qt3DInput\qinputaspect.h>
-
-#include <Qt3DExtras\qforwardrenderer.h>
-#include <Qt3DExtras\qphongmaterial.h>
-#include <Qt3DExtras\qcylindermesh.h>
-#include <Qt3DExtras\qspheremesh.h>
-#include <Qt3DExtras\qtorusmesh.h>
+#include <Qt3DExtras\qorbitcameracontroller.h>
 #include <Qt3DExtras\qt3dwindow.h>
-
-#include <qpropertyanimation.h>
 
 Qt3DCore::QEntity * createScene();
 
@@ -33,6 +22,12 @@ int main(int argc, char * argv[])
   camera->setViewCenter(QVector3D(0.0f, 0.0f, 0.0f));
 
   Qt3DCore::QEntity * scene = createScene();
+
+  auto controller{ new Qt3DExtras::QOrbitCameraController(scene) };
+  controller->setLinearSpeed(50.0f);
+  controller->setLookSpeed(180.0f);
+  controller->setCamera(camera);
+
   view.setRootEntity(scene);
 
   view.show();
