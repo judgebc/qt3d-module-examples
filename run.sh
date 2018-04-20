@@ -27,15 +27,13 @@ else
 	folder=$1
 fi
 
-if [ ! -d $folder/build ]
-then
-	cmake -H$folder -B$folder/build -G"Visual Studio 15 2017 Win64" -DCMAKE_PREFIX_PATH=/c/Qt/5.10.1/msvc2017_64/lib/cmake
-fi
+cmake -H$folder -B$folder/build -G"Visual Studio 15 2017 Win64" -DCMAKE_PREFIX_PATH=/c/Qt/5.10.1/msvc2017_64/lib/cmake
 
 only_gen="--gen"
 
 if [[ $2 = $only_gen ]]
 then
+
 	exit 0
 fi
 

@@ -1,10 +1,82 @@
 <!DOCTYPE RCC><RCC version="1.0">
-<qresource>
-	<file alias="textures/diffuse">textures/pattern_09/diffuse.webp</file>
-	<file alias="textures/normal">textures/pattern_09/normal.webp</file>
-	<file alias="textures/specular">textures/pattern_09/specular.webp</file>
-	<file alias="textures/chest">textures/chest/diffuse.webp</file>
-	<file alias="mesh/chest">meshes/Chest.obj</file>
-	<file alias="mesh/trefoil">meshes/trefoil.obj</file>
+<qresource prefix="/textures">
+	<file alias="floor/diffuse">textures/pattern_09/diffuse.webp</file>
+	<file alias="floor/normal">textures/pattern_09/normal.webp</file>
+	<file alias="floor/specular">textures/pattern_09/specular.webp</file>
+
+	<file alias="chest">textures/chest/diffuse.webp</file>
+
+	<file alias="barrel/diffuse_black">textures/barrel/diffus_black.webp</file>
+	<file alias="barrel/diffuse_blue">textures/barrel/diffus_blue.webp</file>
+	<file alias="barrel/diffuse_green">textures/barrel/diffus_green.webp</file>
+	<file alias="barrel/diffuse_red">textures/barrel/diffus_red.webp</file>
+	<file alias="barrel/diffuse_rust">textures/barrel/diffus_rust.webp</file>
+	<file alias="barrel/diffuse_stainless_steel">textures/barrel/diffus_stainless_steel.webp</file>
+	<file alias="barrel/diffuse_yellow">textures/barrel/diffus_yellow.webp</file>
+	<file alias="barrel/normal_hard_bumps">textures/barrel/normal_hard_bumps.webp</file>
+	<file alias="barrel/normal_middle_bumps">textures/barrel/normal_middle_bumps.webp</file>
+	<file alias="barrel/normal_no_bumps">textures/barrel/normal_no_bumps.webp</file>
+	<file alias="barrel/normal_soft_bumps">textures/barrel/normal_soft_bumps.webp</file>
+	<file alias="barrel/specular">textures/barrel/specular.webp</file>
+	<file alias="barrel/specular_rust">textures/barrel/specular_rust.webp</file>
+	<file alias="barrel/specular_stainless_steel">textures/barrel/specular_stainless_steel.webp</file>
+
+	<file alias="plant/bamboo">textures/house_plants/bamboo.webp</file>
+	<file alias="plant/bamboo_normal">textures/house_plants/bamboo_normal.webp</file>
+	<file alias="plant/cover">textures/house_plants/cover.webp</file>
+	<file alias="plant/cover_normal">textures/house_plants/cover_normal.webp</file>
+	<file alias="plant/palm">textures/house_plants/palm.webp</file>
+	<file alias="plant/palm_normal">textures/house_plants/palm_normal.webp</file>
+	<file alias="plant/pine">textures/house_plants/pine.webp</file>
+	<file alias="plant/pine_normal">textures/house_plants/pine_normal.webp</file>
+	<file alias="plant/pot">textures/house_plants/pot.webp</file>
+	<file alias="plant/pot_normal">textures/house_plants/pot_normal.webp</file>
+	<file alias="plant/shrub">textures/house_plants/shrub.webp</file>
+	<file alias="plant/shrub_normal">textures/house_plants/shrub_normal.webp</file>
+	<file alias="plant/spikes">textures/house_plants/spikes.webp</file>
+	<file alias="plant/spikes_normal">textures/house_plants/spikes_normal.webp</file>
+</qresource>
+<qresource prefix="/mesh">
+	<file alias="chest">meshes/Chest.obj</file>
+
+	<file alias="trefoil">meshes/trefoil.obj</file>
+
+	<file alias="barrel">meshes/metal_barrel.obj</file>
+
+	<file alias="cross-bamboo">meshes/cross-bamboo.obj</file>
+	<file alias="cross-palm">meshes/cross-palm.obj</file>
+	<file alias="cross-pine">meshes/cross-pine.obj</file>
+	<file alias="cross-pot">meshes/cross-pot.obj</file>
+	<file alias="cross-pot-cover">meshes/cross-pot-cover.obj</file>
+	<file alias="cross-shrub">meshes/cross-shrub.obj</file>
+	<file alias="cross-spikes">meshes/cross-spikes.obj</file>
+	<file alias="cylinder-bamboo">meshes/cylinder-bamboo.obj</file>
+	<file alias="cylinder-palm">meshes/cylinder-palm.obj</file>
+	<file alias="cylinder-pine">meshes/cylinder-pine.obj</file>
+	<file alias="cylinder-pot">meshes/cylinder-pot.obj</file>
+	<file alias="cylinder-pot-cover">meshes/cylinder-pot-cover.obj</file>
+	<file alias="cylinder-shrub">meshes/cylinder-shrub.obj</file>
+	<file alias="cylinder-spikes">meshes/cylinder-spikes.obj</file>
+	<file alias="sphere-bamboo">meshes/sphere-bamboo.obj</file>
+	<file alias="sphere-palm">meshes/sphere-palm.obj</file>
+	<file alias="sphere-pine">meshes/sphere-pine.obj</file>
+	<file alias="sphere-pot">meshes/sphere-pot.obj</file>
+	<file alias="sphere-pot-cover">meshes/sphere-pot-cover.obj</file>
+	<file alias="sphere-shrub">meshes/sphere-shrub.obj</file>
+	<file alias="sphere-spikes">meshes/sphere-spikes.obj</file>
+	<file alias="square-bamboo">meshes/square-bamboo.obj</file>
+	<file alias="square-palm">meshes/square-palm.obj</file>
+	<file alias="square-pine">meshes/square-pine.obj</file>
+	<file alias="square-pot">meshes/square-pot.obj</file>
+	<file alias="square-pot-cover">meshes/square-pot-cover.obj</file>
+	<file alias="square-shrub">meshes/square-shrub.obj</file>
+	<file alias="square-spikes">meshes/square-spikes.obj</file>
+	<file alias="triangle-bamboo">meshes/triangle-bamboo.obj</file>
+	<file alias="triangle-palm">meshes/triangle-palm.obj</file>
+	<file alias="triangle-pine">meshes/triangle-pine.obj</file>
+	<file alias="triangle-pot">meshes/triangle-pot.obj</file>
+	<file alias="triangle-pot-cover">meshes/triangle-pot-cover.obj</file>
+	<file alias="triangle-shrub">meshes/triangle-shrub.obj</file>
+	<file alias="triangle-spikes">meshes/triangle-spikes.obj</file>
 </qresource>
 </RCC>

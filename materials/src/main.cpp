@@ -22,91 +22,154 @@
 #include "renderableentity.h"
 #include "planeentity.h"
 #include "rotatingtrefoilknot.h"
+#include "barrel.h"
+#include "houseplant.h"
 
 Qt3DCore::QEntity * createSceneRoot(const Qt3DExtras::Qt3DWindow&);
 
 int main(int argc, char * argv[])
 {
-  QGuiApplication app(argc, argv);
+	QGuiApplication app(argc, argv);
 
-  Qt3DExtras::Qt3DWindow view;
+	Qt3DExtras::Qt3DWindow view;
 
-  Qt3DCore::QEntity * sceneRoot{ createSceneRoot(view) };
+	Qt3DCore::QEntity * sceneRoot{ createSceneRoot(view) };
 
-  view.setRootEntity(sceneRoot);
-  view.show();
+	view.setRootEntity(sceneRoot);
+	view.show();
 
-  return app.exec();
+	return app.exec();
 }
 
 Qt3DCore::QEntity * createSceneRoot(const Qt3DExtras::Qt3DWindow& view)
 {
-  Qt3DCore::QEntity * sceneRoot{ new Qt3DCore::QEntity };
+	Qt3DCore::QEntity * sceneRoot{ new Qt3DCore::QEntity };
 
-  {
-    Qt3DRender::QCamera * camera = view.camera();
-    camera->setProjectionType(Qt3DRender::QCameraLens::PerspectiveProjection);
-    camera->setUpVector(QVector3D(0.0, 1.0f, 0.0f));
-    camera->setViewCenter(QVector3D(0.0f, 3.5f, 0.0f));
-    camera->setPosition(QVector3D(0.0f, 3.5f, 25.0f));
+	{
+		Qt3DRender::QCamera * camera = view.camera();
+		camera->setProjectionType(Qt3DRender::QCameraLens::PerspectiveProjection);
+		camera->setUpVector(QVector3D(0.0, 1.0f, 0.0f));
+		camera->setViewCenter(QVector3D(0.0f, 3.5f, 0.0f));
+		camera->setPosition(QVector3D(0.0f, 3.5f, 25.0f));
 
-    auto camController{ new Qt3DExtras::QFirstPersonCameraController(sceneRoot) };
-    camController->setCamera(camera);
-  }
+		auto camController{ new Qt3DExtras::QFirstPersonCameraController(sceneRoot) };
+		camController->setCamera(camera);
+	}
 
-  {
-    auto planeEntity{ new PlaneEntity(sceneRoot) };
-    planeEntity->mesh()->setHeight(100.0f);
-    planeEntity->mesh()->setWidth(100.0f);
-    planeEntity->mesh()->setMeshResolution(QSize(20, 20));
+	{
+		auto planeEntity{ new PlaneEntity(sceneRoot) };
+		planeEntity->mesh()->setHeight(100.0f);
+		planeEntity->mesh()->setWidth(100.0f);
+		planeEntity->mesh()->setMeshResolution(QSize(20, 20));
 
-    auto normalDSM{ new Qt3DExtras::QNormalDiffuseSpecularMapMaterial };
-    normalDSM->setTextureScale(10.0f);
-    normalDSM->setShininess(80.0f);
-    normalDSM->setAmbient(QColor::fromRgbF(0.2f, 0.2f, 0.2f, 1.0f));
+		auto normalDSM{ new Qt3DExtras::QNormalDiffuseSpecularMapMaterial };
+		normalDSM->setTextureScale(10.0f);
+		normalDSM->setShininess(80.0f);
+		normalDSM->setAmbient(QColor::fromRgbF(0.2f, 0.2f, 0.2f, 1.0f));
 
-    auto diffuseImage{ new Qt3DRender::QTextureImage };
-    diffuseImage->setSource(QUrl(QStringLiteral("qrc:/textures/diffuse")));
-    normalDSM->diffuse()->addTextureImage(diffuseImage);
+		auto diffuseImage{ new Qt3DRender::QTextureImage };
+		diffuseImage->setSource(QUrl(QStringLiteral("qrc:/textures/floor/diffuse")));
+		normalDSM->diffuse()->addTextureImage(diffuseImage);
 
-    auto specularImage{ new Qt3DRender::QTextureImage };
-    specularImage->setSource(QUrl(QStringLiteral("qrc:/textures/specular")));
-    normalDSM->specular()->addTextureImage(specularImage);
+		auto specularImage{ new Qt3DRender::QTextureImage };
+		specularImage->setSource(QUrl(QStringLiteral("qrc:/textures/floor/specular")));
+		normalDSM->specular()->addTextureImage(specularImage);
 
-    auto normalImage{ new Qt3DRender::QTextureImage };
-    normalImage->setSource(QUrl(QStringLiteral("qrc:/textures/normal")));
-    normalDSM->normal()->addTextureImage(normalImage);
+		auto normalImage{ new Qt3DRender::QTextureImage };
+		normalImage->setSource(QUrl(QStringLiteral("qrc:/textures/floor/normal")));
+		normalDSM->normal()->addTextureImage(normalImage);
 
-    planeEntity->addComponent(normalDSM);
-  }
+		planeEntity->addComponent(normalDSM);
+	}
 
-  {
-    auto chest{ new RenderableEntity(sceneRoot) };
-    chest->transform()->setScale(0.03f);
-    chest->mesh()->setSource(QUrl(QStringLiteral("qrc:/mesh/chest")));
+	{
+		auto chest{ new RenderableEntity(sceneRoot) };
+		chest->transform()->setScale(0.03f);
+		chest->mesh()->setSource(QUrl(QStringLiteral("qrc:/mesh/chest")));
 
-    auto diffuseMap{ new Qt3DExtras::QDiffuseMapMaterial };
-    diffuseMap->setSpecular(QColor::fromRgbF(0.2f, 0.2f, 0.2f, 1.0f));
-    diffuseMap->setShininess(2.0f);
+		auto diffuseMap{ new Qt3DExtras::QDiffuseMapMaterial };
+		diffuseMap->setSpecular(QColor::fromRgbF(0.2f, 0.2f, 0.2f, 1.0f));
+		diffuseMap->setShininess(2.0f);
 
-    auto diffuseImage{ new Qt3DRender::QTextureImage };
-    diffuseImage->setSource(QUrl(QStringLiteral("qrc:/textures/chest")));
-    diffuseMap->diffuse()->addTextureImage(diffuseImage);
+		auto diffuseImage{ new Qt3DRender::QTextureImage };
+		diffuseImage->setSource(QUrl(QStringLiteral("qrc:/textures/chest")));
+		diffuseMap->diffuse()->addTextureImage(diffuseImage);
 
-    chest->addComponent(diffuseMap);
-  }
+		chest->addComponent(diffuseMap);
+	}
 
-  {
-    auto trefoil{ new RotatingTrefoilKnot(sceneRoot) };
-    trefoil->setPosition(QVector3D(0.0f, 3.5f, 0.0f));
-    trefoil->setScale(0.5f);
+	{
+		auto trefoil{ new RotatingTrefoilKnot(sceneRoot) };
+		trefoil->setPosition(QVector3D(0.0f, 3.5f, 0.0f));
+		trefoil->setScale(0.5f);
 
-    auto phongMat{ new Qt3DExtras::QPhongMaterial };
-    phongMat->setDiffuse(QColor(204, 205, 75));
-    phongMat->setSpecular(Qt::white);
+		auto phongMat{ new Qt3DExtras::QPhongMaterial };
+		phongMat->setDiffuse(QColor(204, 205, 75));
+		phongMat->setSpecular(Qt::white);
 
-    trefoil->addComponent(phongMat);
-  }
+		trefoil->addComponent(phongMat);
+	}
 
-  return sceneRoot;
+	{
+		auto basicBarrel{ new Barrel(sceneRoot) };
+		basicBarrel->transform()->setTranslation(QVector3D(8.0f, 0.0f, 0.0f));
+
+		auto rustyBarrel{ new Barrel(sceneRoot) };
+		rustyBarrel->setDiffuse(Barrel::DiffuseColor::RustDiffuse);
+		rustyBarrel->setSpecular(Barrel::SpecularColor::RustSpecular);
+		rustyBarrel->setBumps(Barrel::Bumps::HardBumps);
+		rustyBarrel->transform()->setTranslation(QVector3D(10.0f, 0.0f, 0.0f));
+
+		auto blueBarrel{ new Barrel(sceneRoot) };
+		blueBarrel->setDiffuse(Barrel::DiffuseColor::Blue);
+		blueBarrel->setBumps(Barrel::Bumps::SoftBumps);
+		blueBarrel->transform()->setTranslation(QVector3D(12.0f, 0.0f, 0.0f));
+
+		auto greenBarrel{ new Barrel(sceneRoot) };
+		greenBarrel->setDiffuse(Barrel::DiffuseColor::Green);
+		greenBarrel->setBumps(Barrel::Bumps::SoftBumps);
+		greenBarrel->transform()->setTranslation(QVector3D(14.0f, 0.0f, 0.0f));
+
+		auto stainlessBarrel{ new Barrel(sceneRoot) };
+		stainlessBarrel->setDiffuse(Barrel::DiffuseColor::StainlessSteelDiffuse);
+		stainlessBarrel->setSpecular(Barrel::SpecularColor::StainlessSteelSpecular);
+		stainlessBarrel->setBumps(Barrel::Bumps::NoBumps);
+		stainlessBarrel->setShininess(150.0f);
+		stainlessBarrel->transform()->setTranslation(QVector3D(16.0f, 0.0f, 0.0f));
+	}
+
+	{
+		auto squareBamboo{ new HousePlant(sceneRoot) };
+		squareBamboo->setPotShape(HousePlant::PotShape::Square);
+		squareBamboo->setPosition(QVector3D(4.0f, 0.0f, 0.0f));
+
+		auto trianglePalm{ new HousePlant(sceneRoot) };
+		trianglePalm->setPlantType(HousePlant::Plant::Palm);
+		trianglePalm->setPotShape(HousePlant::PotShape::Triangle);
+		trianglePalm->setPosition(QVector3D(0.0f, 0.0f, 4.0f));
+
+		auto spherePine{ new HousePlant(sceneRoot) };
+		spherePine->setPlantType(HousePlant::Plant::Pine);
+		spherePine->setPotShape(HousePlant::PotShape::Sphere);
+		spherePine->setPosition(QVector3D(-4.0f, 0.0f, 0.0f));
+
+		auto crossSpikes{ new HousePlant(sceneRoot) };
+		crossSpikes->setPlantType(HousePlant::Plant::Spikes);
+		crossSpikes->setPotShape(HousePlant::PotShape::Cross);
+		crossSpikes->setPosition(QVector3D(0.0f, 0.0f, -4.0f));
+
+		auto crossPalm{ new HousePlant(sceneRoot) };
+		crossPalm->setPlantType(HousePlant::Plant::Palm);
+		crossPalm->setPotShape(HousePlant::PotShape::Cross);
+		crossPalm->setPosition(QVector3D(0.0f, 0.0f, -8.0f));
+		crossPalm->setScale(0.05f);
+
+		auto crossShrub{ new HousePlant(sceneRoot) };
+		crossShrub->setPlantType(HousePlant::Plant::Shrub);
+		crossShrub->setPotShape(HousePlant::PotShape::Cross);
+		crossShrub->setPosition(QVector3D(0.0f, 0.0f, 8.0f));
+		crossShrub->setScale(0.05f);
+	}
+
+	return sceneRoot;
 }
