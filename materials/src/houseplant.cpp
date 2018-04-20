@@ -115,14 +115,22 @@ float HousePlant::scale() const
 
 void HousePlant::updatePotShape()
 {
-	m_pot->mesh()->setSource(QUrl(QStringLiteral("qrc:/mesh/") + potNames[static_cast<int>(m_potShape)].c_str() + QStringLiteral("-pot")));
-	m_plant->mesh()->setSource(QUrl(QStringLiteral("qrc:/mesh/") + potNames[static_cast<int>(m_potShape)].c_str() + QStringLiteral("-") + plantNames[static_cast<int>(m_plantType)].c_str()));
+	QString potMesh = QStringLiteral("qrc:/mesh/") + potNames[static_cast<int>(m_potShape)].c_str() + QStringLiteral("-pot");
+	QString plantMesh = QStringLiteral("qrc:/mesh/") + potNames[static_cast<int>(m_potShape)].c_str() + QStringLiteral("-") + plantNames[static_cast<int>(m_plantType)].c_str();
+
+	m_pot->mesh()->setSource(QUrl(potMesh));
+	m_plant->mesh()->setSource(QUrl(plantMesh));
 }
 
 void HousePlant::updatePlantType()
 {
-	m_plant->mesh()->setSource(QUrl(QStringLiteral("qrc:/mesh/") + potNames[static_cast<int>(m_potShape)].c_str() + QStringLiteral("-") + plantNames[static_cast<int>(m_plantType)].c_str()));
+	QString plantMesh = QStringLiteral("qrc:/mesh/") + potNames[static_cast<int>(m_potShape)].c_str() + QStringLiteral("-") + plantNames[static_cast<int>(m_plantType)].c_str();
 
-	m_plantImage->setSource(QUrl(QStringLiteral("qrc:/textures/plant/") + plantNames[static_cast<int>(m_plantType)].c_str()));
-	m_plantNormalImage->setSource(QUrl(QStringLiteral("qrc:/textures/plant/") + plantNames[static_cast<int>(m_plantType)].c_str() + QStringLiteral("_normal")));
+	m_plant->mesh()->setSource(QUrl(plantMesh));
+
+	QString plantImage = QStringLiteral("qrc:/textures/plant/") + plantNames[static_cast<int>(m_plantType)].c_str();
+	QString plantNormalImage = QStringLiteral("qrc:/textures/plant/") + plantNames[static_cast<int>(m_plantType)].c_str() + QStringLiteral("_normal");
+
+	m_plantImage->setSource(QUrl(plantImage));
+	m_plantNormalImage->setSource(QUrl(plantNormalImage));
 }

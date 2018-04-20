@@ -23,6 +23,7 @@
 #include "planeentity.h"
 #include "rotatingtrefoilknot.h"
 #include "barrel.h"
+#include "houseplant.h"
 
 Qt3DCore::QEntity * createSceneRoot(const Qt3DExtras::Qt3DWindow&);
 
@@ -135,6 +136,39 @@ Qt3DCore::QEntity * createSceneRoot(const Qt3DExtras::Qt3DWindow& view)
 		stainlessBarrel->setBumps(Barrel::Bumps::NoBumps);
 		stainlessBarrel->setShininess(150.0f);
 		stainlessBarrel->transform()->setTranslation(QVector3D(16.0f, 0.0f, 0.0f));
+	}
+
+	{
+		auto squareBamboo{ new HousePlant(sceneRoot) };
+		squareBamboo->setPotShape(HousePlant::PotShape::Square);
+		squareBamboo->setPosition(QVector3D(4.0f, 0.0f, 0.0f));
+
+		auto trianglePalm{ new HousePlant(sceneRoot) };
+		trianglePalm->setPlantType(HousePlant::Plant::Palm);
+		trianglePalm->setPotShape(HousePlant::PotShape::Triangle);
+		trianglePalm->setPosition(QVector3D(0.0f, 0.0f, 4.0f));
+
+		auto spherePine{ new HousePlant(sceneRoot) };
+		spherePine->setPlantType(HousePlant::Plant::Pine);
+		spherePine->setPotShape(HousePlant::PotShape::Sphere);
+		spherePine->setPosition(QVector3D(-4.0f, 0.0f, 0.0f));
+
+		auto crossSpikes{ new HousePlant(sceneRoot) };
+		crossSpikes->setPlantType(HousePlant::Plant::Spikes);
+		crossSpikes->setPotShape(HousePlant::PotShape::Cross);
+		crossSpikes->setPosition(QVector3D(0.0f, 0.0f, -4.0f));
+
+		auto crossPalm{ new HousePlant(sceneRoot) };
+		crossPalm->setPlantType(HousePlant::Plant::Palm);
+		crossPalm->setPotShape(HousePlant::PotShape::Cross);
+		crossPalm->setPosition(QVector3D(0.0f, 0.0f, -8.0f));
+		crossPalm->setScale(0.05f);
+
+		auto crossShrub{ new HousePlant(sceneRoot) };
+		crossShrub->setPlantType(HousePlant::Plant::Shrub);
+		crossShrub->setPotShape(HousePlant::PotShape::Cross);
+		crossShrub->setPosition(QVector3D(0.0f, 0.0f, 8.0f));
+		crossShrub->setScale(0.05f);
 	}
 
 	return sceneRoot;
