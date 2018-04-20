@@ -16,6 +16,7 @@
 #include <Qt3DExtras\qspheremesh.h>
 #include <Qt3DExtras\qtorusmesh.h>
 #include <Qt3DExtras\qt3dwindow.h>
+#include <Qt3DExtras\qorbitcameracontroller.h>
 
 #include <qpropertyanimation.h>
 
@@ -33,8 +34,13 @@ int main(int argc, char * argv[])
   camera->setViewCenter(QVector3D(0.0f, 0.0f, 0.0f));
 
   Qt3DCore::QEntity * scene = createScene();
-  view.setRootEntity(scene);
 
+  auto orbitController{ new Qt3DExtras::QOrbitCameraController(scene) };
+  orbitController->setLinearSpeed(50.0f);
+  orbitController->setLookSpeed(180.0f);
+  orbitController->setCamera(camera);
+
+  view.setRootEntity(scene);
   view.show();
 
   return app.exec();
