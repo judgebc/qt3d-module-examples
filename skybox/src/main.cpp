@@ -7,6 +7,7 @@
 
 #include <Qt3DExtras\qorbitcameracontroller.h>
 #include <Qt3DExtras\qt3dwindow.h>
+#include <Qt3DExtras\qforwardrenderer.h>
 
 Qt3DCore::QEntity * createScene();
 
@@ -16,9 +17,12 @@ int main(int argc, char * argv[])
 
   Qt3DExtras::Qt3DWindow view;
 
+  view.defaultFrameGraph()->setClearColor(Qt::black);
+
   Qt3DRender::QCamera * camera = view.camera();
   camera->lens()->setPerspectiveProjection(45.0f, 16.0f / 9.0f, 0.1f, 1000.0f);
-  camera->setPosition(QVector3D(0.0f, 0.0f, 40.0f));
+  camera->setPosition(QVector3D(0.0f, 0.0f, -40.0f));
+  camera->setUpVector(QVector3D(0.0f, 1.0f, 0.0f));
   camera->setViewCenter(QVector3D(0.0f, 0.0f, 0.0f));
 
   Qt3DCore::QEntity * scene = createScene();
