@@ -1,7 +1,10 @@
 #include "barrel.h"
 
+#include <Qt3DCore\qtransform.h>
+
 #include <Qt3DRender\qabstracttexture.h>
 #include <Qt3DRender\qtextureimage.h>
+#include <Qt3DRender\qmesh.h>
 
 #include <Qt3DExtras\qnormaldiffusespecularmapmaterial.h>
 
@@ -42,6 +45,9 @@ Barrel::Barrel(Qt3DCore::QNode * parent) :
 	m_normalTextureImage(new Qt3DRender::QTextureImage),
 	m_specularTextureImage(new Qt3DRender::QTextureImage)
 {
+	mesh()->setSource(QUrl(QStringLiteral("qrc:/mesh/barrel")));
+	transform()->setScale(0.03f);
+
 	m_diffuseTexture = m_material->diffuse();
 	m_normalTexture = m_material->normal();
 	m_specularTexture = m_material->specular();
